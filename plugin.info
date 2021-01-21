@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/bluegreen/case-insensitive",
+	"name": "Case Insensitive",
+	"description": "Create a new field 'lower-title' with insensitive version of the title, links are case insensitive",
+	"list": ""
+}
