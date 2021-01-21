@@ -1,0 +1,3 @@
+title: $:/plugins/bluegreen/case-insensitive/readme
+
+This plugin [[overrides the builtin link widget|$:/plugins/bluegreen/case-insensitive/LowerLinkWidget.js]] to make all wikilinks case-insensitive.
