@@ -1,3 +1,9 @@
 title: $:/plugins/bluegreen/case-insensitive/readme
 
-This plugin [[overrides the builtin link widget|$:/plugins/bluegreen/case-insensitive/LowerLinkWidget.js]] to make all wikilinks case-insensitive.
+!!!How does this plugin work?
+
+When you edit and save a tiddler, this plugin automatically attatches a field named 'lower-title' with lower-cased title as its value.
+The plugin also maintains an [[indexer|$:/plugins/bluegreen/case-insensitive/LowerTitleIndexer.js]] to speed up the search.
+It also overrides the builtin link widget with custom [[LowerLinkWidget|$:/plugins/bluegreen/case-insensitive/LowerLinkWidget.js]] to search for lower-title field using the indexer.
+Because the plugin isn't iterating over all tiddlers, but instead finds the title from the hashmap using the indexer, links don't decrease performance significantly.
+The indexer is built when you launch tiddlywiki, and is updated when you modify a tiddler.
