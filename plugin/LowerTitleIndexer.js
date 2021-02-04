@@ -20,6 +20,7 @@ It creates a hashmap of {title.toLowerCase(): title}.
         this.build();
     }
     LowerTitleIndexer.prototype.rebuild = function() {
+        this.index = Object.create(null);
         this.build();
     }
     LowerTitleIndexer.prototype.build = function() {
