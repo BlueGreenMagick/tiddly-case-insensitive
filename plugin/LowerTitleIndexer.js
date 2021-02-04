@@ -3,11 +3,11 @@ title: $:/plugins/bluegreen/case-insensitive/LowerTitleIndexer.js
 type: application/javascript
 module-type: indexer
 
-Add LowerTitleIndexer 'lower-title' indexer.
-It creates a hashmap of {lower-title: title}.
+Add LowerTitleIndexer
+It creates a hashmap of {title.toLowerCase(): title}.
 \*/
 
-(function () {
+(function() {
 
     "use strict";
 
@@ -16,24 +16,20 @@ It creates a hashmap of {lower-title: title}.
         this.index = Object.create(null);
     }
 
-    LowerTitleIndexer.prototype.init = function () {
+    LowerTitleIndexer.prototype.init = function() {
         this.build();
     }
-    LowerTitleIndexer.prototype.rebuild = function () {
+    LowerTitleIndexer.prototype.rebuild = function() {
         this.build();
     }
-    LowerTitleIndexer.prototype.build = function () {
+    LowerTitleIndexer.prototype.build = function() {
         var self = this
-        this.wiki.each(function (tiddler, title) {
+        this.wiki.each(function(tiddler, title) {
             var lowered_title = title.toLowerCase()
-            if (tiddler.fields["lower-title"] != lowered_title) {
-                var newTiddler = new $tw.Tiddler(tiddler, { "lower-title": lowered_title });
-                self.wiki.addTiddler(newTiddler);
-            }
             self.index[lowered_title] = title
         });
     }
-    LowerTitleIndexer.prototype.update = function (updateDescriptor) {
+    LowerTitleIndexer.prototype.update = function(updateDescriptor) {
         var self = this
         var oldT = updateDescriptor.old.tiddler;
         var newT = updateDescriptor.new.tiddler;
@@ -60,7 +56,7 @@ It creates a hashmap of {lower-title: title}.
             this.index[newLowerTitle] = newTitle;
         }
     }
-    LowerTitleIndexer.prototype.lookup = function (title) {
+    LowerTitleIndexer.prototype.lookup = function(title) {
         return this.index[title.toLowerCase()]
     }
 
