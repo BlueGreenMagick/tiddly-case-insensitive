@@ -38,17 +38,10 @@ It creates a hashmap of {title.toLowerCase(): title}.
             var oldLowerTitle = oldTitle.toLowerCase();
             var idxTitle = this.index[oldLowerTitle];
             if (!idxTitle) {
-                console.log("LowerTitleIndexer: Title that wasn't indexed got deleted? " + oldTitle);
+                // for debugging purposes
+                console.log("WARNING!LowerTitleIndexer: Title that wasn't indexed got modified: " + oldTitle);
             }
-            if (idxTitle == oldTitle) {
-                // When renaming only case, prev title is deleted after new title is added.
-                // In such situations, idxTitle != oldTitle
-                delete this.index[oldLowerTitle];
-            } else if (!self.wiki.getTiddler(idxTitle)) {
-                // Not above situation. Is a bug.
-                console.log("LowerTitleIndexer: Indexed title doesn't seem to exist? " + oldTitle);
-                delete this.index[oldLowerTitle];
-            }
+            delete this.index[oldLowerTitle];
         }
         if (newT) {
             var newTitle = newT.fields["title"]
