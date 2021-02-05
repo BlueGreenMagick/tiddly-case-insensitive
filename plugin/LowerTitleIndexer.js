@@ -10,9 +10,11 @@ It creates a hashmap of {title.toLowerCase(): title}.
 (function() {
   "use strict";
 
+  const DuplicateError = require("./DuplicateLowerTitleError.js");
   function LowerTitleIndexer(wiki) {
     this.wiki = wiki;
     this.index = Object.create(null);
+    this.hasDuplicates = false;
   }
 
   LowerTitleIndexer.prototype.init = function() {
@@ -24,8 +26,17 @@ It creates a hashmap of {title.toLowerCase(): title}.
   };
   LowerTitleIndexer.prototype.build = function() {
     const self = this;
+    self.hasDuplicates = false;
+    DuplicateError.clearDuplicates();
+
     this.wiki.each(function(tiddler, title) {
       const loweredTitle = title.toLowerCase();
+      if (self.index[loweredTitle]) {
+        self.hasDuplicates = true;
+        DuplicateError.addDuplicate(loweredTitle, self.index[loweredTitle]);
+        DuplicateError.addDuplicate(loweredTitle, title);
+        return;
+      }
       self.index[loweredTitle] = title;
     });
   };
