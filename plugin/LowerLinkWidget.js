@@ -7,30 +7,27 @@ Override link widget.
 \*/
 
 (function() {
+  "use strict";
 
-    /*jslint node: true, browser: true */
-    /*global $tw: false */
-    "use strict";
+  const LinkWidget = require("$:/core/modules/widgets/link.js").link;
 
-    var LinkWidget = require("$:/core/modules/widgets/link.js").link;
+  function LowerLinkWidget(parseTreeNode, options) {
+    LinkWidget.call(this, parseTreeNode, options);
+  }
 
-    function LowerLinkWidget(parseTreeNode, options) {
-        LinkWidget.call(this, parseTreeNode, options);
-    };
+  LowerLinkWidget.prototype = Object.create(LinkWidget.prototype);
 
-    LowerLinkWidget.prototype = Object.create(LinkWidget.prototype);
-
-    LowerLinkWidget.prototype.execute = function() {
-        var returnVal = LinkWidget.prototype.execute.call(this);
-        var realTo = this.wiki.getIndexer("LowerTitleIndexer").lookup(this.to);
-        if (realTo) {
-            this.to = realTo
-            this.isMissing = !this.wiki.tiddlerExists(this.to);
-            this.isShadow = this.wiki.isShadowTiddler(this.to);
-        }
-
-        return returnVal
+  LowerLinkWidget.prototype.execute = function() {
+    const returnVal = LinkWidget.prototype.execute.call(this);
+    const realTo = this.wiki.getIndexer("LowerTitleIndexer").lookup(this.to);
+    if (realTo) {
+      this.to = realTo;
+      this.isMissing = !this.wiki.tiddlerExists(this.to);
+      this.isShadow = this.wiki.isShadowTiddler(this.to);
     }
 
-    exports.link = LowerLinkWidget;
+    return returnVal;
+  };
+
+  exports.link = LowerLinkWidget;
 })();
