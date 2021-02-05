@@ -14,5 +14,9 @@
   "bugs": {
     "url": "https://github.com/BlueGreenMagick/tiddly-case-insensitive/issues"
   },
-  "homepage": "https://github.com/BlueGreenMagick/tiddly-case-insensitive#readme"
+  "homepage": "https://github.com/BlueGreenMagick/tiddly-case-insensitive#readme",
+  "devDependencies": {
+    "eslint": "^7.19.0",
+    "eslint-config-google": "^0.14.0"
+  }
 }
