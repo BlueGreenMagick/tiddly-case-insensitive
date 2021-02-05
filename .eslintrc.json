@@ -15,6 +15,7 @@
             "double"
         ],
         "require-jsdoc": "off",
-        "spaced-comment": "off"
+        "spaced-comment": "off",
+        "eqeqeq": "error"
     }
 }
