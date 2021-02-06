@@ -35,5 +35,8 @@ The indexer is built every time you launch tiddlywiki, and is updated when you m
 
 !!Other important stuff
 
-This plugin overwrites a core widget: [[LinkWidget|$:/core/modules/widgets/link.js]]
-<br>
+* This plugin overwrites a core widget: [[LinkWidget|$:/core/modules/widgets/link.js]]
+* This plugin was only tested on TW5 core version 5.1.23. It may not work on older versions. (It will probably work)
+* Author: [[bluegreenmagick|https://github.com/BlueGreenMagick]]
+* [[Github Repo|https://github.com/BlueGreenMagick/tiddly-case-insensitive]]
+* License: The MIT License
