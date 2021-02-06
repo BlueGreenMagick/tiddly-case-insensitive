@@ -1,8 +1,36 @@
 title: $:/plugins/bluegreen/case-insensitive/readme
 
-!!!How does this plugin work?
+
+!!How do you use the plugin?
+
+It's really simple! Just make a normal wikilink like this: `[[tiddler]]`.
+
+With this plugin, every links will become case-insensitive. If you have a tiddler named `tiDDler`, all wikilink syntax such as `[[tiddler]]`, `[[abc|TiddleR]]`, `<?link to="TIddler">`, will all take you to `tiDDler`! 
+<br>
+
+!!What happens when there are multiple tiddlers with same case-insensitive titles?
+
+When you launch TiddlyWiki, this plugin will index all the tiddlers in the wiki. 
+When it detects multiple tiddlers with the same name, it will then write the list of tiddlers with the same title in [[$:/plugins/bluegreen/case-insensitive/SameNameWarning]],
+and show the warning tiddler on top of your default tiddlers.
+
+Real-time warnings are on my to-do list, but there are no such systems yet.
+<br>
+
+!!How do I make a case-sensitive link?
+
+You can't. This plugin makes every link case-insensitive.
+<br>
+
+!!How does this plugin work?
 
 The plugin maintains a [[LowerTitleIndexer|$:/plugins/bluegreen/case-insensitive/LowerTitleIndexer.js]] of {title.toLowerCase(): title}.
 It also overrides the builtin link widget with custom [[LowerLinkWidget|$:/plugins/bluegreen/case-insensitive/LowerLinkWidget.js]] to search for proper case title using LowerTitleIndexer.
 When searching for links, because the plugin finds the title from the hashmap instead of iterating over all tiddlers, links don't decrease performance significantly.
 The indexer is built every time you launch tiddlywiki, and is updated when you modify a tiddler. So it //may// take slightly more time for the Tiddlywiki to launch.
+<br>
+
+!!Other important stuff
+
+This plugin overwrites a core widget: [[LinkWidget|$:/core/modules/widgets/link.js]]
+<br>
