@@ -28,13 +28,14 @@ module-type: macro
 
   exports.name = "DuplicateLowerTitleError";
   exports.params = [];
-  exports.run = function() {
-    if (Object.keys(duplicates).length === 0) {
-      return "!!There are no duplicate case-insensitive tiddlers";
-    }
-    const titleStr = "!!Duplicate case-insensitive tiddlers were detected.";
-    let outputStr = "";
+
+  function generateWarningBody() {
+    const title = "<h2><span class='tc-alert-highlight'>Warning: </span>" +
+                  "Duplicate case-insensitive tiddler titles were found!</h2>";
+    const subTitle = "Please rename the tiddlers by clicking the below links.";
+    let outputStr = title + subTitle;
     for (const key of Object.keys(duplicates)) {
+      outputStr += "<hr>";
       const duplicate = duplicates[key];
       for (let y = 0; y < duplicate.length; y++) {
         // Avoid having to escape special characters.
@@ -51,8 +52,20 @@ module-type: macro
         outputStr += outerEl.innerHTML + "<br>";
         console.log(outerEl.innerHTML);
       }
-      outputStr += "<hr>" + "<br>";
     }
-    return titleStr + "<br><br>" + outputStr;
+    return outputStr;
+  }
+
+  exports.run = function() {
+    let bodyStr;
+
+    if (Object.keys(duplicates).length === 0) {
+      bodyStr = "!!Found no tiddlers with duplicate case-insensitive titles";
+    } else {
+      bodyStr = generateWarningBody();
+    }
+
+
+    return "<div class='tc-alert'>" + bodyStr + "</div>";
   };
 })();
