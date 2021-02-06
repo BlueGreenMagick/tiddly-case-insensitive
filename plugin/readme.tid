@@ -19,7 +19,10 @@ Real-time warnings are on my to-do list, but there are no such systems yet.
 
 !!How do I make a case-sensitive link?
 
-You can't. This plugin makes every link case-insensitive.
+You aren't supposed to. This plugin makes every link case-insensitive.
+
+That said, there is a way to link case-sensitively: `<a href="{{url of this tiddlywiki file}}#TiddlerTitle">TiddlerTitle</a>`. 
+In fact, this is the way this plugin uses for its warning page to link to tiddlers with same case-insensitive names.
 <br>
 
 !!How does this plugin work?
