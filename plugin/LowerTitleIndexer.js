@@ -5,6 +5,10 @@ module-type: indexer
 
 Add LowerTitleIndexer
 It creates a hashmap of {title.toLowerCase(): title}.
+
+To get the proper-case title from non-proper-case titles, call
+ $tw.wiki.getIndexer("LowerTitleIndexer").lookup(title)
+ And it will return this.index[title.toLowerCase()]
 \*/
 
 (function() {
@@ -32,10 +36,12 @@ It creates a hashmap of {title.toLowerCase(): title}.
     };
     $tw.hooks.addHook("th-opening-default-tiddlers-list", onLaunch);
   };
+
   LowerTitleIndexer.prototype.rebuild = function() {
     this.index = Object.create(null);
     this.build();
   };
+
   LowerTitleIndexer.prototype.build = function() {
     const self = this;
     self.hasDuplicates = false;
@@ -52,6 +58,7 @@ It creates a hashmap of {title.toLowerCase(): title}.
       self.index[loweredTitle] = title;
     });
   };
+
   LowerTitleIndexer.prototype.update = function(updateDescriptor) {
     const oldT = updateDescriptor.old.tiddler;
     const newT = updateDescriptor.new.tiddler;
@@ -76,6 +83,7 @@ It creates a hashmap of {title.toLowerCase(): title}.
       this.index[newLowerTitle] = newTitle;
     }
   };
+
   LowerTitleIndexer.prototype.lookup = function(title) {
     return this.index[title.toLowerCase()];
   };
