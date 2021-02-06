@@ -19,6 +19,18 @@ It creates a hashmap of {title.toLowerCase(): title}.
 
   LowerTitleIndexer.prototype.init = function() {
     this.build();
+
+    const errTitle = "$:/plugins/bluegreen/case-insensitive/SameNameWarning";
+    const onLaunch = function(storyList) {
+      if (self.hasDuplicates === true) {
+        storyList.unshift(errTitle);
+
+        // Don't show the warning next time user clicks home.
+        self.hasDuplicates = false;
+      }
+      return storyList;
+    };
+    $tw.hooks.addHook("th-opening-default-tiddlers-list", onLaunch);
   };
   LowerTitleIndexer.prototype.rebuild = function() {
     this.index = Object.create(null);
@@ -39,18 +51,6 @@ It creates a hashmap of {title.toLowerCase(): title}.
       }
       self.index[loweredTitle] = title;
     });
-
-    const errTitle = "$:/plugins/bluegreen/case-insensitive/SameNameWarning";
-    const onOpen = function(storyList) {
-      if (self.hasDuplicates === true) {
-        storyList.unshift(errTitle);
-
-        // Don't show the warning next time user clicks home.
-        self.hasDuplicates = false;
-      }
-      return storyList;
-    };
-    $tw.hooks.addHook("th-opening-default-tiddlers-list", onOpen);
   };
   LowerTitleIndexer.prototype.update = function(updateDescriptor) {
     const oldT = updateDescriptor.old.tiddler;
