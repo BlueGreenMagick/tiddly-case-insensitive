@@ -22,6 +22,7 @@ To get the proper-case title from non-proper-case titles, call
   }
 
   LowerTitleIndexer.prototype.init = function() {
+    const self = this;
     this.build();
 
     const errTitle = "$:/plugins/bluegreen/case-insensitive/SameNameWarning";
