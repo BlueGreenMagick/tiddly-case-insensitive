@@ -3,7 +3,7 @@
 	"name": "Case Insensitive Links",
 	"description": "Case Insensitive Links",
 	"author": "bluegreenmagick",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"source": "https://github.com/BlueGreenMagick/tiddly-case-insensitive",
 	"list": "readme"
 }
