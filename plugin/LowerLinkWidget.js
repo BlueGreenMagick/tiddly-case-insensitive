@@ -28,6 +28,20 @@ Override link widget.
 
     return returnVal;
   };
+  LowerLinkWidget.prototype.refresh = function(changedTiddlers) {
+    const changedAttributes = this.computeAttributes();
+    if (changedAttributes.to ||
+        Object.keys(changedTiddlers)
+            .map((t) => t.toLowerCase())
+            .includes(this.to.toLowerCase()) ||
+        changedAttributes["aria-label"] ||
+        changedAttributes.tooltip
+    ) {
+      this.refreshSelf();
+      return true;
+    }
+    return this.refreshChildren(changedTiddlers);
+  };
 
   exports.link = LowerLinkWidget;
 })();
