@@ -1,6 +1,11 @@
 {
     "env": {
-        "es6": true
+        "es6": true,
+        "browser": true,
+        "node": true
+    },
+    "globals": {
+        "$tw": "readonly"
     },
     "parserOptions": {
         "ecmaVersion": 6

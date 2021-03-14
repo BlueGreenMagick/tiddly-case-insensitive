@@ -49,6 +49,7 @@ To get the proper-case title from non-proper-case titles, call
     DuplicateError.clearDuplicates();
 
     this.wiki.each(function(tiddler, title) {
+      if (typeof title.toLowerCase !== "function") return;
       const loweredTitle = title.toLowerCase();
       if (self.index[loweredTitle]) {
         self.hasDuplicates = true;
@@ -69,11 +70,10 @@ To get the proper-case title from non-proper-case titles, call
       const idxTitle = this.index[oldLowerTitle];
       if (!idxTitle) {
         // for debugging purposes
-        const errMsg = (
+        const errMsg =
           "WARNING!LowerTitleIndexer: " +
           "Title that wasn't indexed got modified: " +
-          oldTitle
-        );
+          oldTitle;
         console.log(errMsg);
       }
       delete this.index[oldLowerTitle];
